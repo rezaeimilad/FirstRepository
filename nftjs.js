@@ -1352,7 +1352,7 @@ function isDataURI(filename) {
 
 
 
-var wasmBinaryFile = 'nftjs.wasm';
+var wasmBinaryFile = 'https://github.com/rezaeimilad/FirstRepository/raw/master/nftjs.wasm';
 if (!isDataURI(wasmBinaryFile)) {
   wasmBinaryFile = locateFile(wasmBinaryFile);
 }
