@@ -48,8 +48,8 @@
   font-family: 'Inter';
   font-style:  normal;
   font-weight: 400;
-  src: url("Inter-Regular.woff2") format("woff2"),
-       url("Inter-Regular.woff") format("woff");
+  src: url("https://github.com/rezaeimilad/FirstRepository/blob/master/xrplus%20demo/Inter-Regular.woff2?raw=true") format("woff2"),
+       url("https://github.com/rezaeimilad/FirstRepository/blob/master/xrplus%20demo/Inter-Regular.woff?raw=true") format("woff");
 }
 /*
 @font-face {
