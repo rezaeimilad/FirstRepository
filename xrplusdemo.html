@@ -1,0 +1,292 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>XR.+ Demo 3 | webAR</title>
+    <meta name="keywords" content="AR VR XR webAR browser XR+ XR.+ xr.plus" />
+    <meta name="description" content="XR.+ Demo 3 | Create and publish AR &amp; VR projects directly in web browsers" />
+
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, shrink-to-fit=no" />
+    <meta name="mobile-web-app-capable" content="yes"> <!-- fullscreen if added in homescreen -->
+    <meta name="google" value="notranslate">
+
+    <meta name="theme-color" content="#000000" />
+
+    <meta property="og:updated_time" content="1573144352" />
+
+    <meta property="og:image" content="https://xr.plus/s/201909/baq/p512.jpg" />
+    <meta property="og:image:secure_url" content="https://xr.plus/s/201909/baq/p512.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="500" />
+    <meta property="og:image:height" content="500" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="XR.+ Demo 3" />
+    <meta property="og:description" content="Create and publish AR &amp; VR projects directly in web browsers" />
+    <meta property="og:site_name" content="XR.+" />
+    <meta property="og:url" content="https://xr.plus/baq" />
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@XRdotplus">
+    <meta name="twitter:creator" content="@XRdotplus">
+    <meta name="twitter:title" content="XR.+ Demo 3">
+    <meta name="twitter:description" content="Create and publish AR &amp; VR projects directly in web browsers">
+    <meta name="twitter:image" content="https://xr.plus/s/201909/baq/p512.jpg">
+
+    <link rel="stylesheet" type="text/css" href="https://xr.plus/fonts/inter/stylesheet.css" />
+    <link rel="stylesheet" type="text/css" href="https://raw.githubusercontent.com/rezaeimilad/FirstRepository/master/xrplusfonts.css" />
+
+    <style>
+        #preloader {
+            z-index: 101;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #e0e0e0;
+        }
+
+            #preloader > div {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+            }
+
+            #preloader .spinner {
+                margin: auto;
+                width: 160px;
+                height: 160px;
+                position: relative;
+                border-radius: 50%;
+                border: 5px solid white;
+                border-right: 5px solid red;
+                border-bottom: 5px solid red;
+                border-left: 5px solid red;
+                animation: spin 1s ease infinite;
+            }
+
+        @keyframes spin {
+            0% {
+                transform: rotateZ(0);
+            }
+
+            100% {
+                transform: rotateZ(359deg);
+            }
+        }
+
+        #access, #noAccess, #noCamera, #desktop {
+            display: none;
+        }
+    </style>
+
+
+</head>
+
+<body class="ar defaultBranding nft">
+    <!--  -->
+
+
+    <style>
+        #fixedFull {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            overflow: hidden;
+        }
+
+        #overThreejs {
+            overflow: hidden;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform-origin: 0 0;
+            transform: translate(-50%, -50%);
+            background: #808080;
+        }
+
+        #threejs {
+            transform-origin: 0 0;
+            position: relative;
+            display: block;
+        }
+
+        .p #threejs {
+            transform-origin: 0 0;
+            top: 0;
+            transform: rotate(-90deg) translate(-100%, -50%);
+        }
+    </style>
+    <div id="fixedFull">
+        <div id="overThreejs">
+            <canvas id="threejs"></canvas>
+        </div>
+    </div>
+
+    <div id="access" class="brandingBg"><div><p data-text="allowAccess">Please allow access to the camera</p></div></div>
+
+    <div id="sceneLoader" class="brandingBg">
+        <div>
+            <h1>XR.+ Demo 3</h1>
+            <p data-text="loadingTheMagic">loading the magic</p>
+            <div class="filler"><div id="fill" class="fill"></div></div>
+        </div>
+    </div>
+
+    <div id="playPanel" class="brandingBg" style="display:none;">
+        <div></div>
+        <p data-text="start">start</p>
+    </div>
+
+    <div id="preloader" class="brandingBg"><div><div class="spinner"></div></div></div>
+
+    <div id="noAccess">
+        <div>
+            <h3 data-text="noAccess">No camera access</h3>
+            <p data-text="yesCamera" id="yesCamera">Accessing your device camera is required for augmented reality experiences</p>
+            <div id="noCamera"><p data-text="noCamera">Sorry, but it seems you have no camera plugged-in. Plug a camera and try again</p></div>
+            <p><a data-text="tryAgain" class="button" id="tryAgain" target="_self" href="https://xr.plus/baq">try again</a></p>
+
+        </div>
+    </div>
+
+    <div id="desktop" class="brandingBg">
+
+        <a data-text="joinTheCommunityTop" class="join" target="_top" href="https://xr.plus//register">Join the community and publish content in AR!</a>
+
+        <div class="content brandingBg">
+
+            <div class="top">
+                <div class="preview"><img src="https://xr.plus/s/201909/baq/p512.jpg" alt="scene cover" /></div>
+                <div class="text">
+                    <h3><span data-text="betterOnMobile">Augmented Reality is better on mobile</span></h3>
+                    <p><span data-text="visitOnMobile">On your phone web browser, visit </span><span class="url">xr.plus/baq</span></p>
+                </div>
+            </div>
+
+            <div class="bottom">
+                <div class="marker"><img class="patternPreview" src="https://xr.plus/p/201909/6lq/512.jpg" alt="ar marker" /></div>
+                <div class="youtube"><div class="videoWrapper" id="youtubeIframeWrapper"></div></div>
+            </div>
+
+            <div class="buttons">
+                <span data-text="continueAnyway" class="button continue" id="b_continueOnDesktop">continue anyway</span>
+            </div>
+
+        </div>
+
+    </div>
+    <div id="logo"><img src="https://xr.plus/assets/logo.png" alt="" /></div>
+    <div id="social">
+        <span data-index="0">
+        </span>
+    </div>
+
+    <div class="pattern">
+        <div class="brandingBg">
+            <p data-text="direct">Point the camera to this image</p>
+            <img class="patternPreview" src="" alt="" />
+            <span class="button" id="b_marker" data-text="help">Help</span>
+
+        </div>
+    </div>
+
+    <footer class="brandingBg">
+        <div id="mainButton"></div>
+        <div id="pages"></div>
+        <div class="modules"></div>
+        <div id="sceneSelector"></div>
+        <div id="orientation">
+            <ul><li id="h" data-text="flat">flat</li><li id="v" data-text="vertical">vertical</li></ul>
+        </div>
+
+        <div class="title brandingBg">
+            <div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="help" class="brandingBg">
+
+        <div class="image"><img class="help" src="par/assets/help.jpg" alt="" /></div>
+        <div class="text mobile">
+            <p data-text="onAnother">On another phone or on a computer, <br />visit <span class="link">https://xr.plus/p/6lq</span> <br />to display the AR tracking image.</p>
+        </div>
+        <div class="text desktop">
+            <p class="url"><span class="link">xr.plus/baq</span></p>
+            <p data-text="visitThisLink">Visit this link with your phone browser<br />and point the phone camera here.</p>
+            <!-- <p><a data-text="displayThePattern" class="button" href="xr.plus/p" target="self">display the AR pattern</a></p> -->
+        </div>
+        <ul class="patternPreviews"></ul>
+        <span class="b_close" id="b_close_help"></span>
+    </div>
+
+    <div id="patternLarge" class="brandingBg">
+        <div class="image"><img class="patternPreview" src="https://xr.plus/p/201909/6lq/512.jpg" alt="ar marker" /></div>
+        <span class="b_close" id="b_close_patternLarge"></span>
+    </div>
+
+    <div id="more" class="brandingBg">
+        <h1></h1>
+        <span class="by"></span>
+        <span class="description"></span>
+        <div>
+            <p data-text="discoverMoreOnTheHome" class="discover">Discover more</p>
+            <div class="items">
+                <a class="item" href="https://xr.plus/"><img src="https://xr.plus/s/201808/it4/p256.jpg" alt="Vincent" /></a>
+                <a class="item" href="https://xr.plus/"><img src="https://xr.plus/s/201910/izs/p256.jpg" alt="Halloween pumpkin" /></a>
+                <a class="item" href="https://xr.plus/"><img src="https://xr.plus/s/201801/1yu/p256.jpg" alt="BMW M3" /></a>
+            </div>
+            <p data-text="joinTheCommunity">Join the community to publish <br />3d models and images in augmented reality</p>
+            <a data-text="joinNow" class="button join" target="_top" href="https://xr.plus/register">Join now</a>
+        </div>
+        <span class="b_close" id="b_close_more"></span>
+    </div>
+
+    <div id="redirection" class="brandingBg">
+        <h1></h1>
+        <span class="by"></span>
+        <span class="description"></span>
+        <div>
+            <p id="p_redirection"></p>
+            <p><a class="button" id="b_redirection" href="" target="_top"></a></p>
+        </div>
+        <span class="b_close" id="b_close_redirection"></span>
+    </div>
+
+
+    <video id="bgVideo" autoplay muted playsinline></video>
+
+    <script>
+        var _language = navigator.language || navigator.userLanguage;
+        const _domainMin = "xr.plus";
+        const _rootDirectory = "https://xr.plus/";
+        const _projectURL = "baq";
+        const _folder = "par/";
+        const _preview = "https://xr.plus/s/201909/baq/p512.jpg";
+        var _patternPageURL = 'https://xr.plus/p/6lq';
+        var _isVertical = false;
+        const _desktopEnabled = true;
+        const _skipDesktopAR = false;
+        const _isNFT = true;
+        const _isDebug = false;
+        var stats = null;
+    </script>
+
+
+    <script src="https://xr.plus/js/is.min.js"></script>
+    <script src="https://xr.plus/js/browser-detection.js"></script>
+    <script src="https://xr.plus/js/jszip315.min.js"></script>
+    <script src="https://xr.plus/js/jszip-utils.fork.js"></script>
+    <script src="https://xr.plus/js/3-105.js"></script>
+    <script src="https://raw.githubusercontent.com/rezaeimilad/FirstRepository/master/nftjs.js"></script>
+    <script src="https://raw.githubusercontent.com/rezaeimilad/FirstRepository/master/process-nft-dist.js"></script>
+</body>
+</html>
