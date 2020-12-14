@@ -183,8 +183,6 @@ function start(
         context_draw.strokeStyle = "red";
         context_draw.stroke();
 
-        var vid_res = document.getElementById('result');
-        vid_res.play();
     };
     function process() {
         context_process.fillStyle = "black";
