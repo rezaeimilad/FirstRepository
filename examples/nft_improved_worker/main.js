@@ -180,9 +180,8 @@ function start(
         context_draw.lineTo(p3.x, p3.y);
         context_draw.lineTo(p4.x, p4.y);
         context_draw.closePath();
-        context_draw.strokeStyle = "red";
+        context_draw.strokeStyle = "blue";
         context_draw.stroke();
-
     };
     function process() {
         context_process.fillStyle = "black";
