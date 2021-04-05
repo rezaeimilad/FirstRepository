@@ -15,8 +15,12 @@
         </video>
       
         <script>
-            var e = document.getElementById("arElem");
-            e.play();
+            (function() {
+               // your page initialization code here
+               // the DOM will be available here
+                var e = document.getElementById("arElem");
+                e.play();
+            })();
         </script>
     </body>
 </html>
