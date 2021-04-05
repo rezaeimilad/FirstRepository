@@ -17,7 +17,13 @@
         <script>
             var e = document.getElementById("arElem");
             e.play();
-            e.muted = false;
+            
+            document.onmouseover = function() {mouseOver()};
+            
+            function mouseOver() {
+                var e222 = document.getElementById("arElem");
+                e222.muted = false;
+            }
         </script>
     </body>
 </html>
